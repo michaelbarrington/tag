@@ -77,7 +77,7 @@ func NewAliasFile() *AliasFile {
 	aliasPrefix := getEnvDefault("TAG_ALIAS_PREFIX", "e")
 	aliasCmdFmtString := getEnvDefault(
 		"TAG_CMD_FMT_STRING",
-		`vim -c "call cursor({{.LineNumber}}, {{.ColumnNumber}})" "{{.Filename}}"`)
+		`$EDITOR -c "call cursor({{.LineNumber}}, {{.ColumnNumber}})" "{{.Filename}}"`)
 
 	a := &AliasFile{
 		fmtStr:   "alias " + aliasPrefix + "{{.MatchIndex}}='" + aliasCmdFmtString + "'\n",
@@ -214,7 +214,7 @@ func handleColorSetting(prog string, args []string) {
 }
 
 func main() {
-	searchProg := getEnvDefault("TAG_SEARCH_PROG", "ag")
+	searchProg := getEnvDefault("TAG_SEARCH_PROG", "rg")
 	check(validateSearchProg(searchProg))
 
 	userArgs := os.Args[1:]
